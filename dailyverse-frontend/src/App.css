@@ -1,0 +1,81 @@
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Ensure the app container covers the full screen */
+.app-container {
+  display: flex;
+  justify-content: center; /* Center content horizontally */
+  align-items: center;    /* Center content vertically */
+  height: 100vh;          /* Full viewport height */
+  width: 100vw;           /* Full viewport width */
+  margin: 0;              /* No default margin */
+  padding: 0;             /* No default padding */
+  background-size: cover; /* Make the background cover the screen */
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: Arial, sans-serif;
+}
+
+/* Style the verse box */
+.verse-box {
+  background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  border: 1px solid #ddd;              /* Subtle border */
+  border-radius: 10px;                 /* Rounded corners */
+  padding: 20px;                       /* Add spacing inside the box */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  text-align: center;                  /* Center the text */
+  max-width: 600px;                    /* Limit the box width */
+  width: 90%;                          /* Make it responsive */
+  line-height: 1.5;                    /* Improve readability */
+  color: #2c3e50;                      /* Dark text for contrast */
+}
+
+/* Style the verse text */
+.verse-text {
+  font-size: 1.8rem;                   /* Larger font size */
+  font-weight: bold;                   /* Make it stand out */
+  margin-bottom: 15px;                 /* Add spacing below the verse */
+}
+
+/* Style the verse reference */
+.verse-reference {
+  font-size: 1.2rem;                   /* Slightly smaller font size */
+  font-weight: 600;                    /* Semi-bold for emphasis */
+  color: #34495e;                      /* Darker shade for contrast */
+  font-style: italic;                  /* Italicize for style */
+}
+
+.spinner {
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-top: 5px solid white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .verse-box {
+      max-width: 90%;                  /* Adjust box width for smaller screens */
+  }
+
+  .verse-text {
+      font-size: 1.5rem;               /* Adjust font size for smaller screens */
+  }
+
+  .verse-reference {
+      font-size: 1rem;                 /* Adjust reference size */
+  }
+  
+}
