@@ -8,10 +8,11 @@ const App = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const today = new Date().toISOString().split('T')[0]; // Get today's date (e.g., "2025-01-04")
+            const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
 
             // Check localStorage for existing data and its timestamp
             const storedData = JSON.parse(localStorage.getItem('dailyData'));
+
             if (storedData && storedData.date === today) {
                 // Use stored data if it's from today
                 setVerse(storedData.verse);
@@ -36,8 +37,8 @@ const App = () => {
                     {
                         headers: { Authorization: API_KEY },
                         params: {
-                            query: 'nature', // Keywords for scenic images
-                            per_page: 10,
+                            query: 'nature scenery Lion', // Keywords for scenic images
+                            per_page: 10, // Fetch up to 10 images
                         },
                     }
                 );
@@ -50,7 +51,11 @@ const App = () => {
                 setBackgroundUrl(newBackgroundUrl);
                 localStorage.setItem(
                     'dailyData',
-                    JSON.stringify({ date: today, verse: newVerse, backgroundUrl: newBackgroundUrl })
+                    JSON.stringify({
+                        date: today,
+                        verse: newVerse,
+                        backgroundUrl: newBackgroundUrl,
+                    })
                 );
             } catch (error) {
                 console.error('Error fetching data:', error);
