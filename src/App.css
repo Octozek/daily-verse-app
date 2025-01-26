@@ -82,6 +82,22 @@ body, html {
   transform: translate(-50%, -50%);
 }
 
+/* Ensure the loading text stays centered and doesn't rotate */
+.spinner-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.spinner-container p {
+  margin-top: 50px; /* Push text below the spinner */
+  font-size: 1.2rem;
+  color: white;
+}
+
+
 /* Modal styling */
 .modal-overlay {
   position: fixed;
