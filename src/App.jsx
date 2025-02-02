@@ -18,26 +18,38 @@ const App = () => {
       const today = new Date().toISOString().split("T")[0];
       const storedData = JSON.parse(localStorage.getItem("dailyData"));
 
-      if (storedData && isMounted) {
-        if (storedData.date === today) {
-          storedData.verse.text = sanitizeText(storedData.verse.text);
-          setVerse(storedData.verse);
-          setBackgroundUrl(storedData.backgroundUrl);
-          setStreak(storedData.streak || 0);
+      let currentStreak = storedData?.streak || 0;
+      const lastAccessedDate = storedData?.date;
 
-          const storedFavorites =
-            JSON.parse(localStorage.getItem("favorites")) || [];
-          setFavorites(storedFavorites);
-          setIsFavorited(
-            storedFavorites.some(
-              (fav) => fav.reference === storedData.verse.reference
-            )
-          );
-        } else {
-          await fetchVerseAndBackground(today, storedData.streak || 0);
+      if (lastAccessedDate) {
+        const lastDate = new Date(lastAccessedDate);
+        const currentDate = new Date(today);
+        const differenceInDays =
+          Math.floor((currentDate - lastDate) / (1000 * 60 * 60 * 24));
+
+        if (differenceInDays === 1) {
+          currentStreak += 1; // Increment streak if visited on the next day
+        } else if (differenceInDays > 1) {
+          currentStreak = 0; // Reset streak if skipped a day
         }
+      }
+
+      if (storedData && storedData.date === today) {
+        storedData.verse.text = sanitizeText(storedData.verse.text);
+        setVerse(storedData.verse);
+        setBackgroundUrl(storedData.backgroundUrl);
+        setStreak(currentStreak);
+
+        const storedFavorites =
+          JSON.parse(localStorage.getItem("favorites")) || [];
+        setFavorites(storedFavorites);
+        setIsFavorited(
+          storedFavorites.some(
+            (fav) => fav.reference === storedData.verse.reference
+          )
+        );
       } else {
-        await fetchVerseAndBackground(today, 0);
+        await fetchVerseAndBackground(today, currentStreak);
       }
     };
 
@@ -155,7 +167,7 @@ const App = () => {
 
   if (!verse) {
     return (
-        <div className="spinner-container">
+      <div className="spinner-container">
         <div className="spinner"></div>
         <p>Loading...</p>
       </div>
