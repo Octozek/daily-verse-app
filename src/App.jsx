@@ -17,20 +17,20 @@ const App = () => {
     const fetchData = async () => {
       const today = new Date().toISOString().split("T")[0];
       const storedData = JSON.parse(localStorage.getItem("dailyData"));
-
       let currentStreak = storedData?.streak || 0;
       const lastAccessedDate = storedData?.date;
 
       if (lastAccessedDate) {
         const lastDate = new Date(lastAccessedDate);
         const currentDate = new Date(today);
-        const differenceInDays =
-          Math.floor((currentDate - lastDate) / (1000 * 60 * 60 * 24));
+        const differenceInDays = Math.floor(
+          (currentDate - lastDate) / (1000 * 60 * 60 * 24)
+        );
 
         if (differenceInDays === 1) {
-          currentStreak += 1; // Increment streak if visited on the next day
+          currentStreak += 1; // Increase streak if visited the next day
         } else if (differenceInDays > 1) {
-          currentStreak = 0; // Reset streak if skipped a day
+          currentStreak = 0; // Reset streak if missed a day
         }
       }
 
@@ -66,7 +66,7 @@ const App = () => {
         const bgResponse = await axios.get("https://api.pexels.com/v1/search", {
           headers: { Authorization: API_KEY },
           params: {
-            query: "nature scenery",
+            query: "dense forest, misty forest, deep woods, old-growth forest, pine forest, autumn forest, majestic mountains, snow-capped peaks, rocky mountains, alpine scenery, mountain range, sunset over mountains, golden hour landscape, desert landscape, rolling hills",
             per_page: 10,
           },
         });
@@ -135,10 +135,10 @@ const App = () => {
       event.target.closest(".favorites-list") ||
       event.target.closest(".favorites-orb-container")
     ) {
-      return; // Do nothing if clicking inside the card or button
+      return;
     }
     setIsFavoritesView(false);
-    adjustButtonPosition(false); // Reset button position
+    adjustButtonPosition(false);
   };
 
   const adjustButtonPosition = (isVisible) => {
@@ -149,7 +149,7 @@ const App = () => {
       const listHeight = list.offsetHeight;
       button.style.top = `${listHeight + 10}px`;
     } else {
-      button.style.top = "0"; // Reset button position
+      button.style.top = "0";
     }
   };
 
@@ -184,8 +184,12 @@ const App = () => {
         height: "100vh",
         color: "white",
         textShadow: "0 2px 4px rgba(0, 0, 0, 0.7)",
+        position: "relative",
       }}
     >
+      {/* Mist Filter */}
+      <div className="mist-overlay"></div>
+
       {/* Favorites Button */}
       <div
         className="favorites-orb-container"
