@@ -1,37 +1,40 @@
-/* Reset default styles */
+/* ============================== */
+/* 🌍 GLOBAL RESET & CONTAINER STYLES */
+/* ============================== */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Body and HTML styling */
 body, html {
-  margin: 0; /* Remove default margin */
-  padding: 0; /* Remove default padding */
-  box-sizing: border-box;
-  height: 100%; /* Ensure body and html take up full height */
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Inter', Arial, sans-serif;
 }
 
-/* App container styling */
 .app-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Full viewport height */
-  width: 100vw; /* Full viewport width */
-  background-size: cover; /* Background covers the screen */
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  font-family: 'Inter', Arial, sans-serif;
-  position: relative; /* Allows positioning of child elements */
+  position: relative;
 }
 
-/* Verse box */
+/* ============================== */
+/* 📖 VERSE BOX STYLES */
+/* ============================== */
+
 .verse-box {
   position: relative;
-  background: rgba(255, 255, 255, 0.74); /* Adjust transparency here */
-  border: 1px solid #dddddd00;
+  background: rgba(255, 255, 255, 0.74); /* Semi-transparent */
+  border: 1px solid transparent;
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
@@ -43,15 +46,12 @@ body, html {
   animation: fadeIn 1.2s ease-in-out;
 }
 
-
-/* Verse text styling */
 .verse-text {
   font-size: 1.8rem;
   font-weight: bold;
   margin-bottom: 15px;
 }
 
-/* Verse reference styling */
 .verse-reference {
   font-size: 1.2rem;
   font-weight: 600;
@@ -59,17 +59,43 @@ body, html {
   font-style: italic;
 }
 
-/* Streak Display */
+/* ============================== */
+/* 🔥 STREAK DISPLAY */
+/* ============================== */
+
 .streak-display {
-  position: absolute; /* Position relative to the verse box */
-  bottom: 10px; /* Offset from the bottom of the verse box */
-  left: 10px; /* Offset from the left of the verse box */
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
   font-size: 1rem;
-  color: rgba(44, 62, 80, 0.6); /* Faded dark color */
+  color: rgba(44, 62, 80, 0.466);
   font-style: italic;
+  display: flex;
+  align-items: center; /* Keeps elements in the same row */
 }
 
-/* Spinner styles */
+.streak-display img {
+  filter: grayscale(100%) opacity(30%);
+  transition: filter 0.2s ease-in-out;
+  width: 22px; /* Adjust size if needed */
+  height: 22px;
+}
+
+.streak-display img:hover {
+  filter: grayscale(0%) opacity(100%);
+}
+
+.streak-display span {
+  position: relative;
+  top: 2px; /* Moves the number slightly up */
+  margin-left: 5px; /* Creates spacing between the flame and number */
+  font-size: 1rem; /* Ensure good readability */
+}
+
+/* ============================== */
+/* ⏳ LOADING SPINNER */
+/* ============================== */
+
 .spinner {
   border: 5px solid rgba(255, 255, 255, 0.3);
   border-top: 5px solid white;
@@ -83,7 +109,6 @@ body, html {
   transform: translate(-50%, -50%);
 }
 
-/* Ensure the loading text stays centered and doesn't rotate */
 .spinner-container {
   position: absolute;
   top: 50%;
@@ -93,64 +118,63 @@ body, html {
 }
 
 .spinner-container p {
-  margin-top: 50px; /* Push text below the spinner */
+  margin-top: 50px;
   font-size: 1.2rem;
   color: white;
 }
 
+/* ============================== */
+/* 🌫️ MIST FILTER */
+/* ============================== */
 
-/* Modal styling */
-.modal-overlay {
-  position: fixed;
+.mist-overlay {
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.384);
+  backdrop-filter: blur(0px);
+  pointer-events: none;
 }
 
-.modal-content {
-  background: white;
-  border-radius: 10px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  max-width: 400px;
-  width: 90%;
-}
+/* ============================== */
+/* ❤️ FAVORITE ICON */
+/* ============================== */
 
-.modal-content h2 {
-  margin-bottom: 10px;
-  color: #2c3e50;
-}
-
-.modal-content p {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-}
-
-.modal-content button {
-  background: #fbbc04;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+.favorite-icon {
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  font-size: 1rem;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
-.modal-content button:hover {
-  background: #e09c03;
+.heart-icon {
+  fill: rgba(128, 128, 128, 0.5);
+  transition: transform 0.2s ease-in-out, fill 0.2s ease-in-out;
 }
 
-/* Favorites Button */
+.favorited .heart-icon {
+  fill: rgba(255, 0, 0, 0.6);
+}
+
+.favorite-icon:hover .heart-icon {
+  transform: scale(1.1);
+}
+
+.favorite-icon:active .heart-icon {
+  transform: scale(1.3);
+}
+
+/* ============================== */
+/* 📜 FAVORITES LIST & BUTTON */
+/* ============================== */
+
 .favorites-orb-container {
   position: absolute;
-  top: 0; /* Ensures it is flush with the top of the screen */
+  top: 0;
   left: 10px;
   width: 250px;
   height: 30px;
@@ -166,30 +190,30 @@ body, html {
 }
 
 .favorites-orb-container::before {
-  content: "▼"; /* Down arrow by default */
+  content: "▼";
   color: white;
   font-size: 1.5rem;
   transition: all 0.3s ease;
 }
 
 .favorites-orb-container:hover::before {
-  content: "Favorites"; /* Show 'Favorites' on hover */
+  content: "Favorites";
   font-size: 1rem;
   color: black;
 }
 
 .favorites-orb-container:hover {
-  height: 40px; /* Slight hover effect */
+  height: 40px;
   background: lightgray;
 }
 
-/* Favorites Card */
+/* FAVORITES LIST CARD */
 .favorites-list {
   position: absolute;
-  top: -100%; /* Start hidden */
+  top: -100%;
   left: 10px;
   width: 250px;
-  height: calc(100vh - 150px); /* Set dynamic height */
+  height: calc(100vh - 150px);
   background: rgba(255, 255, 255, 0.9);
   overflow-y: auto;
   padding: 10px;
@@ -201,85 +225,40 @@ body, html {
 }
 
 .favorites-list.visible {
-  top: 40px; /* Dropdown active */
+  top: 40px;
 }
 
-/* Styling for the verses shown in the favorites card */
+/* FAVORITE BUTTON STYLING */
 .favorite-item-button {
   display: block;
   width: 100%;
   margin: 10px 0;
   padding: 10px;
-  background-color: #c7c7c7; /* Light gray background for better contrast */
-  border-radius: 5px; /* Rounded corners */
-  text-align: left; /* Align text to the left */
+  background-color: #c7c7c7;
+  border-radius: 5px;
+  text-align: left;
   cursor: pointer;
-  color: #2c3e50; /* Dark text color for readability */
+  color: #2c3e50;
   transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Active favorite verse */
 .favorite-item-button.active {
-  background-color: #e9ecef; /* Slightly darker shade for active */
-  border-color: #b3b3b3; /* More prominent border for active state */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  background-color: #e9ecef;
+  border-color: #b3b3b3;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Hover effect */
 .favorite-item-button:hover {
-  color: rgb(0, 0, 0);
-  background-color: #8a8a8a; /* Darker gray on hover */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
-  border-color: #b3b3b3; /* Slightly darker border on hover */
+  color: black;
+  background-color: #8a8a8a;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  border-color: #b3b3b3;
 }
 
-/* Position the heart button at the bottom-right of the verse box */
-.favorite-icon {
-  position: absolute;
-  bottom: 5px;
-  right: 10px;
-  font-size: 1.0rem;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
+/* ============================== */
+/* 📱 MOBILE RESPONSIVENESS */
+/* ============================== */
 
-
-/* Mist Overlay */
-.mist-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.384); /* Light white mist */
-  backdrop-filter: blur(0px); /* Blur effect */
-  pointer-events: none; /* Allows clicking through the mist */
-}
-
-
-/* Fade-in animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Spinner animation */
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* Responsive design for smaller screens */
 @media (max-width: 768px) {
   .verse-box {
     max-width: 90%;
@@ -292,41 +271,58 @@ body, html {
   .verse-reference {
     font-size: 1rem;
   }
-}
 
-/* Responsive design for smaller screens */
-@media (max-width: 768px) {
   .favorites-list {
-    height: calc(40%); /* Use 40% of the screen height on smaller screens */
+    height: 40%;
   }
 
   .favorites-list.visible {
-    height: calc(40%); /* Dynamically adjust the height on smaller screens */
+    height: 40%;
   }
-}
 
-/* Center both the button and card on mobile */
-@media (max-width: 768px) {
-  /* Center the Favorites Button */
+  /* Center Favorites Button */
   .favorites-orb-container {
-    left: 50%; /* Start from the center */
-    transform: translateX(-50%); /* Center horizontally */
-    width: 90%; /* Make it responsive with 90% width */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
   }
 
   .favorites-orb-container::before {
-    font-size: 1.2rem; /* Adjust font size for better visibility */
+    font-size: 1.2rem;
   }
 
-  /* Center the Favorites Card */
+  /* Center Favorites Card */
   .favorites-list {
-    left: 50%; /* Start from the center */
-    transform: translateX(-50%); /* Center horizontally */
-    width: 90%; /* Make it responsive with 90% width */
-    height: 40%; /* Dynamically adjust the height for smaller screens */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
   }
 
   .favorites-list.visible {
-    top: 40px; /* Adjust position when visible */
+    top: 40px;
+  }
+}
+
+/* ============================== */
+/* 🎬 ANIMATIONS */
+/* ============================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
